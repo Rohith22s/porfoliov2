@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breathtaking</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: black;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 20;
+      color: white;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      transition-duration: 0.5s;
+      /* Added for better padding behavior */
+    }
+
+    nav .logo {
+      font-size: 1.5em;
+      text-decoration: none;
+      color: white;
+      flex-shrink: 0;
+      transition-duration: 0.5s;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
+
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      white-space: nowrap;
+      transition-duration: 0.5s;
+    }
+
+    /* Hover effect */
+    nav ul li a:hover {
+      color: blue;
+    }
+
+    /* Active (current slide) */
+    nav ul li a.active {
+      color: blue;
+    }
+
+    /* Hamburger button (hidden on desktop) */
+    .menu-toggle {
+      display: none;
+      font-size: 2em;
+      cursor: pointer;
+      color: white;
+      z-index: 30;
+    }
+
+    /* Half-screen mobile menu (smaller now) */
+    .mobile-menu {
+      position: fixed;
+      top: -40%;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      /* reduced from 50% */
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: top 0.5s ease;
+      z-index: 25;
+    }
+
+    .mobile-menu.open {
+      top: 0;
+    }
+
+
+    .mobile-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 80%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      /* equal spacing */
+      height: 100%;
+    }
+
+    .mobile-menu ul li {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid gray;
+      /* separator */
+    }
+
+    .mobile-menu ul li:last-child {
+      border-bottom: none;
+      /* remove last line */
+    }
+
+    .mobile-menu ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5em;
+      display: block;
+      width: 100%;
+      padding: 10px 0;
+    }
+
+    .one .title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      width: 50%;
+      height: 10vh;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      border-radius: 25px;
+      position: absolute;
+      top: 35%;
+      left: 25%;
+    }
+
+    .one .sub_title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      width: 30%;
+      height: 8vh;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      border-radius: 25px;
+      position: absolute;
+      top: 46%;
+      left: 35%;
+    }
+
+    .two .name {
+      width: 25%;
+      height: 10vh;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 15%;
+      left: 5%;
+    }
+
+    .two .info {
+      width: 40%;
+      padding: 20px;
+      border-radius: 25px;
+      font-size: 140%;
+      display: flex;
+      align-items: center;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 35%;
+      left: 5%;
+    }
+
+    .two .profile {
+      width: 30%;
+      height: 70vh;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 13%;
+      left: 62%;
+    }
+
+    .two .me {
+      width: 100%;
+      height: 100%;
+    }
+
+    .three .skills_title {
+      width: 25%;
+      height: 10vh;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 10%;
+      left: 40%;
+    }
+
+    .three .tools_title {
+      width: 25%;
+      height: 10vh;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 50%;
+      left: 40%;
+    }
+
+    .three .skills_info {
+      width: 60%;
+      padding: 20px;
+      border-radius: 25px;
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 23%;
+      left: 20%;
+    }
+
+    .three .tools_info {
+      width: 60%;
+      padding: 20px;
+      border-radius: 25px;
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 63%;
+      left: 20%;
+    }
+    .logo{
+      width: 13%;
+      height: 13%;
+      transition-duration: 0.5s;
+    }
+    
+    .logo:hover{
+     transform: scale(1.1);
+    }
+
+    .five .contact_title{
+     width: 25%;
+      height: 10vh;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 20%;
+      left: 40%;
+    }
+
+    .five .contact_info{
+      width: 35%;
+      padding: 20px;
+      border-radius: 25px;
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 33%;
+      left: 33%;
+    }
+
+    .contact_info {
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 20px;
+    }
+
+    .contact_info a {
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      transition-duration: 0.5;
+    }
+
+    .contact_info a:hover {
+      color: rgb(222, 92, 27);
+      transform: scale(1.5);
+    }
+
+    .four .project_title{
+      width: 25%;
+      height: 10vh;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.15);
+      z-index: 3;
+      position: absolute;
+      top: 10%;
+      left: 38%;
+    }
+    /* ========= Mobile Styles ========= */
+    @media (max-width: 768px) {
+      nav {
+        width: 100%;
+        /* Changed from 86% to use full width */
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+        margin-left: auto;
+      }
+    }
+
+    /* Pages */
+    .container {
+      height: 100vh;
+      width: 100%;
+      box-sizing: border-box;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .page {
+      height: 100vh;
+      width: 100%;
+      box-sizing: border-box;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page .bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s linear;
+      z-index: 1;
+    }
+
+    .land {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+    }
+
+    /* ========= Mobile Styles ========= */
+    @media (max-width: 768px) {
+
+      /* Adjust section one (landing section) */
+      .one .title {
+        width: 90%;
+        height: auto;
+        top: 45%;
+        left: 5%;
+        padding: 5px;
+        text-align: center;
+        border-radius: 15px;
+      }
+
+      .one .title h1 {
+        font-size: 1.3em;
+        line-height: 1.4;
+      }
+
+      .one .sub_title {
+        width: 80%;
+        height: auto;
+        top: 55%;
+        left: 9%;
+        padding: 5px;
+        text-align: center;
+        border-radius: 15px;
+      }
+
+      .one .sub_title h4 {
+        font-size: 1em;
+      }
+
+      /* Adjust section two (about me) */
+      .two .name {
+        width: 80%;
+        height: auto;
+        top: 10%;
+        left: 10%;
+        text-align: center;
+        padding: 8px;
+        border-radius: 15px;
+      }
+
+      .two .name h2 {
+        font-size: 1.2em;
+      }
+
+      .two .info {
+        color: black;
+        width: 85%;
+        left: 5%;
+        top: 65%;
+        font-size: 1em;
+        text-align: justify;
+        padding: 15px;
+        border-radius: 15px;
+      }
+
+      .two .profile {
+        width: 70%;
+        height: 40vh;
+        top: 22%;
+        left: 18%;
+        border-radius: 15px;
+      }
+
+      .two .me {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+      }
+
+      .three .skills_title{
+        width: 50%;
+        font-size: 20px;
+        left: 26%;
+      }
+      .three .skills_info{
+        width: 70%;
+        height: 20%;
+        left: 12%;
+      }
+      .three .tools_title{
+        width: 50%;
+        font-size: 20px;
+        left: 26%;
+      }
+      .three .tools_info{
+        width: 70%;
+        height: 20%;
+        left: 12%;
+      }
+      .skills_info .logo{
+        width: 40%;
+        height: 40%;
+      }
+      .tools_info .logo{
+        margin-top: 15%;
+        width: 50%;
+        height: 50%;
+      }
+      .five .contact_title{
+        width: 80%;
+        font-size: 20px;
+        left: 10%;
+        top:34%;
+      }
+      .five .contact_info{
+        width: 80%;
+        font-size: 15px;
+        left: 5%;
+        top:45%
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#portfolio" class="logo">Rohith</a>
+    <ul>
+      <li><a href="#aboutme">about me</a></li>
+      <li><a href="#skills">skills&tools</a></li>
+      <li><a href="#projects">project</a></li>
+      <li><a href="#contact">contact details</a></li>
+    </ul>
+    <span class="menu-toggle">&#9776;</span>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#aboutme" onclick="toggleMenu()">about me</a></li>
+      <li><a href="#skills" onclick="toggleMenu()">skills&tools</a></li>
+      <li><a href="#projects" onclick="toggleMenu()">project</a></li>
+      <li><a href="#contact" onclick="toggleMenu()">contact details</a></li>
+    </ul>
+  </div>
+
+  <div class="container" id="container">
+    <div class="page one" id="portfolio">
+      <div class="title">
+        <h1>Yo!, Guys Welcome to My Portfolio</h1>
+      </div>
+      <div class="sub_title">
+        <h4> Frontend Developer and UI/UX Designer</h4>
+      </div>
+      <img class="bg" src="image/bg1.png" alt="bg1">
+      <img class="land" src="image/bg1gr.png">
+    </div>
+
+    <div class="page two" id="aboutme">
+      <aside class="profile">
+        <img class="me" src="D:\project\portpolio\image\profile.png">
+      </aside>
+      <div class="name">
+        <h2> YO!, Myself Rohith S</h2>
+      </div>
+      <div class="info">
+        <p> I’m currently pursuing my degree at R P Sarathy
+          Institute of Technology. I’m working towards
+          becoming a Full Stack Developer, with a special
+          interest in front-end design. I enjoy creating
+          responsive and visually engaging websites that
+          are both interactive and user-friendly. I’m always
+          eager to learn new skills and improve as I grow in
+          the field of web development</p>
+      </div>
+      <img class="bg" src="image/bg2.png" alt="bg2">
+      <img class="land" src="image/bg2gr.png">
+    </div>
+
+    <div class="page three" id="skills">
+      <div class="skills_title">
+        <h2>Skills</h2>
+      </div>
+      <div class="skills_info">
+        <img class="logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+        <img class="logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+        <img class="logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+          alt="JS">
+        <img class="logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+          alt="Python">
+      </div>
+      <div class="tools_title">
+        <h2>Tools</h2>
+      </div>
+      <div class="tools_info">
+      <img class="logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code">
+      <img class="logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+      </div>
+      <img class="bg" src="image/bg3.png" alt="bg3">
+      <img class="land" src="image/bg3gr.png">
+    </div>
+
+    <div class="page four" id="projects">
+      <div class="project_title">
+        <h2>Project</h2>
+      </div>
+      <img class="bg" src="image/bg4.png" alt="bg4">
+      <img class="land" src="image/bg4gr.png">
+    </div>
+
+    <div class="page five" id="contact">
+      <div class="contact_title">
+        <h2>Contact Details</h2>
+      </div>
+      <div class="contact_info">
+      <p>📧 Email: <a href="mailto:rohithsathish701@gmail.com">rohithsathish701@gmail.com</a></p>
+      <p>🔗 LinkedIn: <a href="https://linkedin.com/in/rohith-s-7a1208345"
+          target="_blank">linkedin.com/in/rohith-s-7a1208345</a></p>
+      <p>💻 GitHub: <a href="https://github.com/Rohith22s" target="_blank">github.com/Rohith22s</a></p>
+      <p>📱 Mobile: <a href="tel:+917530019229">+91 75300 19229</a></p>
+    </div>
+      <img class="bg" src="image/bg5.png" alt="bg5">
+      <img class="land" src="image/bg5gr.png">
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById("container");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    // --- FIX START ---
+    const sections = document.querySelectorAll(".page"); // FIX 1: Select '.page' divs instead of non-existent 'section' tags
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    container.addEventListener("scroll", () => { // FIX 2: Listen for scroll on the '.container' not the 'window'
+      let current = "portfolio"; // Default to the first section
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        // Check if the section is at or above the middle of the viewport
+        if (container.scrollTop >= sectionTop - container.clientHeight / 2) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+    // --- FIX END ---
+
+    // Background zoom effect (This part was correct)
+    container.addEventListener("scroll", () => {
+      let scrollTop = container.scrollTop;
+      let viewportHeight = window.innerHeight;
+      let isMobile = window.innerWidth <= 768;
+
+      document.querySelectorAll(".page .bg").forEach(bg => {
+        let section = bg.closest(".page");
+        let sectionTop = section.offsetTop;
+        let distance = scrollTop - sectionTop;
+
+        if (distance >= -viewportHeight && distance <= viewportHeight) {
+          let scale, translateY;
+
+          if (isMobile) {
+            scale = 1 + Math.min(Math.abs(distance) / 8000, 0.05);
+            translateY = distance * 0.05;
+          } else {
+            scale = 1 + Math.min(Math.abs(distance) / 3000, 0.2);
+            translateY = distance * 0.2;
+          }
+
+          bg.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+        }
+      });
+    });
+
+    // Toggle menu (This part was correct)
+    function toggleMenu() {
+      mobileMenu.classList.toggle("open");
+    }
+
+    menuToggle.addEventListener("click", toggleMenu);
+
+    // Close menu if clicked outside (This part was correct)
+    document.addEventListener("click", (e) => {
+      if (
+        mobileMenu.classList.contains("open") &&
+        !mobileMenu.contains(e.target) &&
+        !menuToggle.contains(e.target)
+      ) {
+        mobileMenu.classList.remove("open");
+      }
+    });
+  </script>
+</body>
+
+</html>
